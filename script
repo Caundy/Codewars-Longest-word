@@ -1,0 +1,44 @@
+from itertools import permutations
+##########################################
+def litery(first, second):
+    tabfirst, tabsecond = [],[]
+    for x in first: tabfirst.append(x)
+    for x in second: tabsecond.append(x)
+    for x in tabfirst:
+        try:
+            tabsecond.pop(tabsecond.index(x))
+        except:
+            return False
+    return True
+###########################################
+def longest_word(letters):
+    #######################################
+    vowels = ('A','E','I','O','U','Y')
+    count = 0
+    tab = []
+    for x in letters:
+        if x in vowels and x not in tab:
+            tab.append(x)
+    i = len(tab)+4
+    #######################################
+    solution = set([])
+    #######################################
+    s=[[]]*10
+    s[2] = [x for x in words if len(x)== 2]
+    s[3] = [x for x in words if len(x)== 3]
+    s[4] = [x for x in words if len(x)== 4]
+    s[5] = [x for x in words if len(x)== 5]
+    s[6] = [x for x in words if len(x)== 6]
+    s[7] = [x for x in words if len(x)== 7]
+    s[8] = [x for x in words if len(x)== 8]
+    s[9] = [x for x in words if len(x)== 9]
+    #######################################
+    while(i!=0):
+        currentwordsofilength = [x for x in s[i] if litery(x,letters)]
+        for x in [''.join(a) for a in permutations(letters, i) if ''.join(a) in currentwordsofilength]:
+            solution.add(x)
+        if not solution: 
+            i=i-1
+        else:          
+            return sorted(solution)     
+    return None  
